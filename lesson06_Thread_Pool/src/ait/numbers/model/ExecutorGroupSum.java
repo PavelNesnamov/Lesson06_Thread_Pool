@@ -1,44 +1,30 @@
 package ait.numbers.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import ait.numbers.task.OneGroupSum;
 
+import java.util.Arrays;
+import java.util.concurrent.*;
 
-public class ExecutorGroupSum extends GroupSum{
+public class ExecutorGroupSum extends GroupSum {
     public ExecutorGroupSum(int[][] numberGroups) {
         super(numberGroups);
     }
 
     @Override
     public int computeSum() {
-        ExecutorService executor = Executors.newFixedThreadPool(numberGroups.length);
-        List<Future<Integer>> futures = new ArrayList<>();
-
-        for (int[] group : numberGroups) {
-            // Add the task as a lambda implementing Callable<Integer>
-            futures.add(executor.submit(() -> {
-                int sum = 0;
-                for (int num : group) {
-                    sum += num;
-                }
-                return sum;
-            }));
+        int poolSize = Runtime.getRuntime().availableProcessors();
+        ExecutorService executorService = Executors.newFixedThreadPool(poolSize);
+        OneGroupSum[] groupSums = new OneGroupSum[numberGroups.length];
+        for (int i = 0; i < groupSums.length; i++) {
+            groupSums[i] = new OneGroupSum(numberGroups[i]);
+            executorService.execute(groupSums[i]);
         }
-
-        int totalSum = 0;
-        for (Future<Integer> future : futures) {
-            try {
-                totalSum += future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-
-        executor.shutdown();
-        return totalSum;
+        return Arrays.stream(groupSums).mapToInt(OneGroupSum::getSum).sum();
     }
 }
