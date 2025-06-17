@@ -24,7 +24,7 @@ public class MessageSender implements Runnable {
             System.out.println("Enter your message, or type exit for quit");
             String message = consoleScanner.nextLine();
             while (!"exit".equalsIgnoreCase(message)) {
-                socketWriter.printf("%s [%s] %s\n", name, LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")), message);
+                socketWriter.printf("%s [%s] %s\n", name, LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")), message);
                 message = consoleScanner.nextLine();
             }
         } catch (IOException e) {
