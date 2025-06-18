@@ -6,5 +6,5 @@ import java.util.List;
 
 @Getter
 public class ResultDto {
-    private List<String[]> tags;
+    private List<TagDto> tags;
 }

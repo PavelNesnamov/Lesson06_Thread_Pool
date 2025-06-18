@@ -7,7 +7,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
+import ait.immaga.dto.TagDto;
 import java.net.URI;
 
 public class ImaggaTagAppl {
@@ -25,8 +25,7 @@ public class ImaggaTagAppl {
         URI url = builder.build().toUri();
         RequestEntity<String> request = new RequestEntity<>(headers, HttpMethod.GET, url);
         ResponseEntity<TagsResponseDto> response = restTemplate.exchange(request, TagsResponseDto.class);
-        response.getBody().getResult().
-
+        response.getBody().getResult().getTags().forEach(tag -> System.out.println(tag.getTag().get("name")));
 
     }
 }
