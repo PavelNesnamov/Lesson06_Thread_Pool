@@ -1,0 +1,10 @@
+package ait.immaga.dto;
+
+import lombok.Getter;
+
+import java.util.List;
+
+@Getter
+public class ResultDto {
+    private List<String[]> tags;
+}
