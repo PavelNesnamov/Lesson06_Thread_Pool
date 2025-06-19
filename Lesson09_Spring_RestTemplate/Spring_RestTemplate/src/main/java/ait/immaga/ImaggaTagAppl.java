@@ -13,11 +13,11 @@ import java.net.URI;
 public class ImaggaTagAppl {
     public static void main(String[] args) {
         String imgUrl = "https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg";
-        String lang = "he";
+        String lang = "de";
         int threshold = 30;
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Basic YWNjXzYyNDlkN2NkMDY0OGFhMzpiNGE2OWE0NWI5M2RjYzc5NTdkNDU2OGE3NjA1NTljZQ==");
+        headers.add("Authorization", "your AuthorizationKey");
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api.imagga.com/v2/tags")
                 .queryParam("image_url", imgUrl)
                 .queryParam("language", lang)
