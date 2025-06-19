@@ -1,5 +1,6 @@
 package ait.messages.model;
 
+
 public class MessageBoxA implements MessageBox {
     private String message;
 

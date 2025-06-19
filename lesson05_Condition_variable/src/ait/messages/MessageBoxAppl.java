@@ -7,6 +7,7 @@ import ait.messages.model.MessageBoxC;
 import ait.messages.service.Receiver;
 import ait.messages.service.Sender;
 
+
 public class MessageBoxAppl {
     private static final int N_MESSAGES = 20;
     private static final int N_RECEIVERS = 5;
