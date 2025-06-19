@@ -10,7 +10,6 @@ public class MessageBoxC implements MessageBox {
     private final Condition senderWaitCondition = mutex.newCondition();
     private final Condition receiverWaitCondition = mutex.newCondition();
 
-
     @Override
     public void post(String message) {
         mutex.lock();

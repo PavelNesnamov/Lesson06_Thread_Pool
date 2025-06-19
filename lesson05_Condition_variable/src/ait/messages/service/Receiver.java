@@ -2,7 +2,6 @@ package ait.messages.service;
 
 import ait.messages.model.MessageBox;
 
-
 public class Receiver implements Runnable {
     private MessageBox messageBox;
 
